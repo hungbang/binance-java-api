@@ -1,7 +1,9 @@
 package com.binance.api.client.domain.account;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FutureAccountBalance {
 
 	@JsonProperty("accountAlias")
@@ -20,7 +22,7 @@ public class FutureAccountBalance {
 	private String crossUnPnl;
 
 	@JsonProperty("updateTime")
-	private int updateTime;
+	private Long updateTime;
 
 	@JsonProperty("asset")
 	private String asset;
@@ -71,11 +73,11 @@ public class FutureAccountBalance {
 		return crossUnPnl;
 	}
 
-	public void setUpdateTime(int updateTime){
+	public void setUpdateTime(Long updateTime){
 		this.updateTime = updateTime;
 	}
 
-	public int getUpdateTime(){
+	public Long getUpdateTime(){
 		return updateTime;
 	}
 

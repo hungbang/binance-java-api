@@ -2,7 +2,8 @@ package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiFutureRestClient;
 import com.binance.api.client.domain.account.FutureAccountBalance;
-import com.binance.api.client.domain.general.ServerTime;
+
+import java.util.List;
 
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.createService;
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.executeSync;
@@ -15,9 +16,8 @@ public class BinanceApiFutureRestClientImpl implements BinanceApiFutureRestClien
     }
 
     @Override
-    public FutureAccountBalance getFutureAccountBalance() {
+    public List<FutureAccountBalance> getFutureAccountBalance(Long recvWindow) {
         long timestamp = System.currentTimeMillis();
-        ServerTime systemTime = executeSync(binanceFutureApiService.getServerTime());
-        return executeSync(binanceFutureApiService.getFutureAccountBalance(systemTime.getServerTime()));
+        return executeSync(binanceFutureApiService.getFutureAccountBalance(timestamp, recvWindow));
     }
 }
