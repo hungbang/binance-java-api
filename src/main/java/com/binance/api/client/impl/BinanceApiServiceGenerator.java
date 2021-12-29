@@ -56,11 +56,17 @@ public class BinanceApiServiceGenerator {
      */
     public static <S> S createService(Class<S> serviceClass, String apiKey, String secret) {
         String baseUrl = null;
-        if (!BinanceApiConfig.useTestnet) { baseUrl = BinanceApiConfig.getApiBaseUrl(); }
+        if (!BinanceApiConfig.useTestnet) {
+            baseUrl = BinanceApiConfig.getApiBaseUrl();
+            if(!BinanceApiConfig.useTestnetFuture){
+                baseUrl = BinanceApiConfig.getFutureApiBaseUrl();
+            }
+        }
         else {
             baseUrl = /*BinanceApiConfig.useTestnetStreaming ?
                 BinanceApiConfig.getStreamTestNetBaseUrl() :*/
-                BinanceApiConfig.getTestNetBaseUrl();
+                    BinanceApiConfig.useTestnetFuture ? BinanceApiConfig.getTestNetFutureBaseUrl():
+                            BinanceApiConfig.getTestNetBaseUrl();
         }
 
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()

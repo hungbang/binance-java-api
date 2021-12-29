@@ -15,13 +15,26 @@ public class BinanceApiConfig {
      */
     private static final String TESTNET_DOMAIN = "testnet.binance.vision";
 
+	/**
+	 * Future Test Network URL.
+	 */
+	private static final String TESTNET_FUTURE_DOMAIN = "testnet.binancefuture.com";
+
     /**
      * Binance Spot Test Network option:
      * true if endpoint is spot test network URL; false if endpoint is production spot API URL.
      */
     public static boolean useTestnet;
 
-    /**
+
+	/**
+	 * Binance Futrue Test Network option:
+	 * true if endpoint is future test network URL; false if endpoint is production future API URL.
+	 */
+	public static boolean useTestnetFuture;
+
+
+	/**
      * Binance Spot Test Network option:
      * true for websocket streaming; false for no streaming.
      */
@@ -53,6 +66,15 @@ public class BinanceApiConfig {
 	}
 
 	/**
+	 * REST API base URL.
+	 */
+	public static String getFutureApiBaseUrl() {
+		return String.format("https://fapi.%s", getBaseDomain());
+	}
+
+
+
+	/**
 	 * Streaming API base URL.
 	 */
 	public static String getStreamApiBaseUrl() {
@@ -72,6 +94,13 @@ public class BinanceApiConfig {
     public static String getTestNetBaseUrl() {
 		return String.format("https://%s", TESTNET_DOMAIN);
     }
+
+	/**
+	 * Spot Test Network API base URL.
+	 */
+	public static String getTestNetFutureBaseUrl() {
+		return String.format("https://%s", TESTNET_FUTURE_DOMAIN);
+	}
 
     /**
      * Streaming Spot Test Network base URL.

@@ -15,7 +15,8 @@ import java.util.List;
 public class MarginAccountEndpointsExample {
 
   public static void main(String[] args) {
-    BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("YOUR_API_KEY", "YOUR_SECRET");
+    BinanceApiClientFactory factory = BinanceApiClientFactory
+            .newInstance("YOUR_API_KEY", "YOUR_SECRET");
     BinanceApiMarginRestClient client = factory.newMarginRestClient();
 
     // Get account balances

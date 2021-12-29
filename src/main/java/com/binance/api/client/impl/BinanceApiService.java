@@ -330,5 +330,10 @@ public interface BinanceApiService {
             @Query("recvWindow") Long recvWindow,
             @Query("timestamp") Long timestamp);
 
+    // Future APIs
+    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
+    @GET("/fapi/v2/balance")
+    Call<FutureAccountBalance> getFutureAccountBalance(
+            @Query("timestamp") Long timestamp);
 
 }

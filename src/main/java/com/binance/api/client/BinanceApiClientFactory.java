@@ -47,6 +47,15 @@ public class BinanceApiClientFactory {
         BinanceApiConfig.useTestnetStreaming = useTestnetStreaming; }
   }
 
+  private BinanceApiClientFactory(String apiKey, String secret, boolean useTestnet, boolean useTestnetStreaming,
+                                  boolean useTestnetFuture) {
+    this(apiKey, secret);
+    if (useTestnet) {
+      BinanceApiConfig.useTestnet = true;
+      BinanceApiConfig.useTestnetFuture = useTestnetFuture;
+      BinanceApiConfig.useTestnetStreaming = useTestnetStreaming; }
+  }
+
   /**
    * New instance.
    *
@@ -71,6 +80,21 @@ public class BinanceApiClientFactory {
    */
     public static BinanceApiClientFactory newInstance(String apiKey, String secret, boolean useTestnet, boolean useTestnetStreaming) {
       return new BinanceApiClientFactory(apiKey, secret, useTestnet, useTestnetStreaming);
+  }
+
+  /**
+   * New instance with optional Future Test Network endpoint.
+   *
+   * @param apiKey the API key
+   * @param secret the Secret
+   * @param useTestnet true if endpoint is spot test network URL; false if endpoint is production spot API URL.
+   * @param useTestnetStreaming true for spot test network websocket streaming; false for no streaming.
+   *
+   * @return the binance api client factory.
+   */
+  public static BinanceApiClientFactory newInstance(String apiKey, String secret, boolean useTestnet,
+                                                    boolean useTestnetStreaming, boolean useTestnetFuture) {
+    return new BinanceApiClientFactory(apiKey, secret, useTestnet, useTestnetStreaming, useTestnetFuture);
   }
 
   /**
@@ -134,5 +158,12 @@ public class BinanceApiClientFactory {
    */
   public BinanceApiSwapRestClient newSwapRestClient() {
     return new BinanceApiSwapRestClientImpl(apiKey, secret);
+  }
+
+  /**
+   * Creates a new synchronous/blocking Future REST client.
+   */
+  public BinanceApiFutureRestClient newFuturesRestClient() {
+    return new BinanceApiFutureRestClientImpl(apiKey, secret);
   }
 }
